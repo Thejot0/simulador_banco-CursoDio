@@ -2,7 +2,6 @@ import sys
 from time import sleep
 import csv
 import os
-
 def linha(tamanho = 40):
     quantidade = '_' * tamanho
 
