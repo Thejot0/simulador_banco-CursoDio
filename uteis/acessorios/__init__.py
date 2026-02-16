@@ -2,10 +2,12 @@ import sys
 from time import sleep
 import csv
 import os
+
+
 def linha(tamanho = 40):
     quantidade = '_' * tamanho
 
-    print(quantidade)
+    print(quantidade, '\n')
 
 def saida_programa():
 
