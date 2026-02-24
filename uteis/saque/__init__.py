@@ -1,4 +1,4 @@
-from uteis import extrato, saldo_banco, acessorios
+from uteis import extrato, acessorios
 from datetime import datetime
 import locale
 
@@ -11,14 +11,13 @@ def tratar_saque(valor, saldo):
         return valor, False
 
     if valor > 500:
-        print('O valor máximo a ser sacado por vez é de R$500\n')
-        return saldo, False
+
+        return saldo, False, 'O valor máximo a ser sacado por vez é de R$500\n'
 
     if valor <= 0:
-        print('Valor incorreto\n')
-        return saldo, False
+        return saldo, False, 'Valor incorreto\n'
 
-    return saldo - valor, True
+    return saldo - valor, True, None
 
 
 def saque(saldo=0):
@@ -27,12 +26,11 @@ def saque(saldo=0):
         try:
             valor = int(input('Digite o valor que deseja sacar: R$'))
 
-            saldo, sucesso = tratar_saque(valor, saldo)
+            saldo, sucesso, menssagem = tratar_saque(valor, saldo)
 
 
             if sucesso:
                 print('Saque efetuado com sucesso!!\n')
-                print(saldo)
 
                 lista_saque = [
                     f'Tipo de transação: Saque\n'
@@ -44,6 +42,9 @@ def saque(saldo=0):
                 for lista in lista_saque:
                     extrato.extrato_transacao(saque=lista)
                 return saldo
+
+            else:
+                print(menssagem)
 
         except ValueError:
             print('Digite apenas numeros inteiros\n')

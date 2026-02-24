@@ -5,7 +5,7 @@ def extrato_transacao(deposito=None, saque=None):
 
     arquivo = 'Extrato.csv'
     arquivo_exist = os.path.exists(arquivo)
-    fieldname = {'Deposito': deposito, 'Saque': saque}
+    fieldname = ['Deposito' 'Saque']
 
     with open(arquivo, mode='a', encoding='utf-8', newline='') as extratos:
         adicionar = csv.DictWriter(extratos, fieldnames=fieldname)
@@ -13,7 +13,7 @@ def extrato_transacao(deposito=None, saque=None):
         if not arquivo_exist:
             adicionar.writeheader()
 
-        adicionar.writerow(fieldname)
+        adicionar.writerow({'Deposito': deposito, 'Saque': saque})
 
 def mostrar_extrato():
     with open('Extrato.csv', mode='r', encoding='utf-8') as extrato:
